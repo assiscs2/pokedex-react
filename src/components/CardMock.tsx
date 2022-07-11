@@ -2,7 +2,7 @@ import { Element } from './Element';
 import ivybassaur from '/src/mock-assets/ivyssaur.png'
 
 export function CardMock() {
-  return <a href="/pokemon/x">
+  return <a href="/pokemon/1">
     <div className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex">
         <div className='flex items-center justify-center h-auto w-52'>
         <img className='h-60 max-h-60 border-r-4 border-gray-900 overflow-hidden'

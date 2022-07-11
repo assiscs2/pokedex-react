@@ -5,7 +5,7 @@ import { ArrowFatLeft } from "phosphor-react";
 export function PokeInfo () {
     return (
         <>
-        <a href="http://localhost:3000/">
+        <a href="/">
         <button className='absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors'>
             <ArrowFatLeft size={28} weight="fill" color='#C6C4CC'/>
             Voltar

@@ -1,6 +1,6 @@
 # Pokedex React
 
-# Application currently in development
+<strong>Application currently in development<strong/>
 
 - The visual aspect of the aplication is mostly complete.
 - Most of the functionalities still need to be developed.

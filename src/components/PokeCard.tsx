@@ -1,3 +1,4 @@
+import { Element } from './Element';
 import bulbassaur from '/src/mock-assets/bulbassaur.png'
 
 export function PokeCard() {
@@ -15,12 +16,8 @@ export function PokeCard() {
         </strong>
 
         <div className='grid gap-2 text-sm'>
-
-            
-        <span className='bg-green-400 border-2 border-gray-900 rounded-lg px-2 py-1 font-semibold flex items-center justify-center bg-opacity-80 hover:bg-opacity-100 transition-opacity'
-        >Grass</span>
-        <span className='bg-fuchsia-500 border-2 border-gray-900 rounded-lg px-2 py-1 font-semibold flex items-center justify-center bg-opacity-80 hover:bg-opacity-100 transition-opacity'
-        >Poison</span>
+          <Element />
+          <Element />
         </div>
 
         </div>

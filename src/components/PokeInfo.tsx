@@ -11,15 +11,15 @@ export function PokeInfo () {
             Voltar
         </button>
         </a>
-        <div className='p-6 h-[80vh] sm:w-[86vw] sm:grid sm:grid-flow-col'>
+        <div className='p-6 h-[80vh] sm:w-[86vw] sm:grid sm:grid-flow-col sm:pl-4'>
         <div className='flex sm:items-start justify-center'>
         <img 
         className='min-h-[185px] min-w-[185px] h-max w-max sm:mt-8'  
         src={bulbassaurPage} alt="Imagem de um Bulbassaur" />
         </div>
-        <div className='p-4 flex flex-col'>
+        <div className='p-4 flex flex-col lg:max-h-24 sm:pl-8 sm:pr-8'>
             
-        <div className='flex-1 sm:max-h-32 lg:max-h-24'>
+        <div className='flex-1 sm:max-h-32'>
             <div className='flex gap-2 font-bold sm:text-2xl justify-center mb-4 items-center'>
                 <span>#ID</span>
                 <span >|</span>
@@ -33,7 +33,7 @@ export function PokeInfo () {
             </ul>
         </div>
 
-        <div className='pt-8 pb-4'>
+        <div className='pt-8 pb-4 lg:pl-16 lg:pr-4'>
         <span className='font-bold sm:text-2xl text-red-500'>Abilities:</span>
         <ul className='mt-1'>
             <li className='flex flex-col gap-1 sm:text-1xl'>
@@ -43,7 +43,7 @@ export function PokeInfo () {
         </ul>
         </div>
 
-        <div className='pt-4 pb-4'>
+        <div className='pt-4 pb-4 lg:pl-16 lg:pr-4'>
         <strong className='sm:text-2xl text-red-500'>Locations:</strong>
         <ul className='mt-1'>
             <li className='mt-1 flex flex-col gap-1'>
@@ -56,7 +56,7 @@ export function PokeInfo () {
         <div className='mt-8'>
             <strong className='sm:text-2xl text-red-500'>STATS</strong>
 
-            <div className='mt-2 flex flex-col lg:grid grid-cols-2'>
+            <div className='mt-2 flex flex-col lg:grid grid-cols-2 mr-2 gap-x-4'>
 
                 <div className='flex gap-1 mb-1'>
                 <strong>HP:</strong>

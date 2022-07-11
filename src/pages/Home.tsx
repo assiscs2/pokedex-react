@@ -11,9 +11,6 @@ export function Home() {
         <ul>
           <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
             <PokeCard />
-            <CardMock />
-            <PokeCard />
-            <CardMock />
           </li>
         </ul>
       </div>

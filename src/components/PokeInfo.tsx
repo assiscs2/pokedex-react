@@ -54,15 +54,18 @@ client
  `
 
 interface PokemonInfoProps {
-  key: number;
-  id: number;
-  name: string;
-  pokemon_species_id: number;
-}
+    key: number;
+    id: number;
+    name: string;
+    pokemon_species_id: number;
+  }
 
-export function PokeInfo (props: PokemonInfoProps) {
+
+export function PokeInfo () {
 
     const { data } = useQuery(GET_POKEMONS_INFORMATION);
+
+    // console.log(data.pokemon_v2_pokemon_aggregate.nodes.name, 'cheguei')
 
     return (
       <>
@@ -90,17 +93,15 @@ export function PokeInfo (props: PokemonInfoProps) {
               <ul>
                 <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">
                   <Element
-                    key={props.id}
-                    id={props.id}
-                    name={props.name}
-                    pokemon_species_id={props.pokemon_species_id}
+                    key={data.id}
+                    id={data.id}
+                    name={data.name}
                     // pokemon_v2_pokemontypes={props.pokemon_v2_pokemontypes.pokemon_v2_type.name}
                   />
                   <Element
-                    key={props.id}
-                    id={props.id}
-                    name={props.name}
-                    pokemon_species_id={props.pokemon_species_id}
+                    key={data.id}
+                    id={data.id}
+                    name={data.name}
                     // pokemon_v2_pokemontypes={props.pokemon_v2_pokemontypes.pokemon_v2_type.name}
                   />
                 </li>

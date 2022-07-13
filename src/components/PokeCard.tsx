@@ -8,17 +8,17 @@ export interface PokemonCardProps {
   pokemon_species_id: number;
 }
 
-interface PokemonV2Type {
-  pokemon_v2_type: PokemonV2NameType;
-}
+// interface PokemonV2Type {
+//   pokemon_v2_type: PokemonV2NameType;
+// }
 
-interface PokemonV2NameType {
-  name: string;
-}
+// interface PokemonV2NameType {
+//   name: string;
+// }
 
-interface  PokemonV2PokemonTypes {
-  pokemon_v2_pokemontypes: PokemonV2Type;
-}
+// interface  PokemonV2PokemonTypes {
+//   pokemon_v2_pokemontypes: PokemonV2Type;
+// }
 
 
 export function PokeCard(props: PokemonCardProps) {
@@ -42,14 +42,12 @@ export function PokeCard(props: PokemonCardProps) {
           <Element 
           key={props.id}
           id={props.id}
-          name={props.name}
-          pokemon_species_id={props.pokemon_species_id}                  
+          name={props.name}              
           />
           <Element 
           key={props.id}
           id={props.id}
-          name={props.name}
-          pokemon_species_id={props.pokemon_species_id}                  
+          name={props.name}          
           />
         </div>
 

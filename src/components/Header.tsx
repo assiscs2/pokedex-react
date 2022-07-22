@@ -1,6 +1,17 @@
+import { useState } from "react";
 import logo from "/src/assets/logo.png";
 
 export function Header() {
+
+  const [ inputText, setInputText ] = useState(); 
+
+  let inputHandler = (e: any) => {
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  }
+
+  console.log(inputText)
+
   return (
     <div className="flex justify-center flex-col items-center border border-gray-900">
       <div className="bg-red-500 w-[100vw] flex items-center justify-center h-16">
@@ -18,6 +29,7 @@ export function Header() {
           className="border-2 border-gray-800 rounded-md max-w-xl w-52 sm:w-[320px] pl-2 text-gray-800 placeholder:text-gray-700 font-sans placeholder:font-sans"
           type="text"
           placeholder="Quem é esse pokémon?"
+          onChange={inputHandler}
         />
         <button className="items-center text-gray-200 text-xs bg-gray-800 hover:bg-gray-700 rounded-lg border-2 sm:text-sm p-1 border-gray-600 transition-colors">
           Pesquisar

@@ -4,9 +4,12 @@ import { PokeInfo } from "../components/PokeInfo";
 
 
 
+export interface PokemonFullInfoProps {
+  id: number;
+  name: string;
+  }
+
 export function Pokemon() {
-
-
 
   return (
     <>

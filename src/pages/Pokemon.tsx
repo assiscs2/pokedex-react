@@ -14,7 +14,7 @@ export function Pokemon() {
     <>
       <Header />
       <div className="mt-8 flex justify-center">
-        <PokeInfo />
+              <PokeInfo/>        
       </div>
     </>
   );

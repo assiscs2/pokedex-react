@@ -155,45 +155,55 @@ export function PokeInfo() {
               Abilities:
             </span>
             <ul className="mt-1">
-              <li className="flex flex-col gap-1 sm:text-1xl">
                 {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
                   (PokeTypeProps: PokemonTypeProps) => {
                     idAbility = increment(idAbility)
                     return (
                       <>
-                        <span key={idAbility}>
-                          {PokeTypeProps.pokemon_v2_ability.name}
-                        </span>
+                        <li 
+                        className="flex flex-col gap-1 sm:text-1xl"
+                        key={idAbility}
+                        >
+                          <span >
+                            {PokeTypeProps.pokemon_v2_ability.name}
+                          </span>
+                        </li>
                       </>
                     );
+
                   }
                 )}
 
                 {/* <span>{pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes[0].pokemon_v2_ability.name}</span> */}
-              </li>
             </ul>
           </div>
 
           <div className="pt-4 pb-4 lg:pl-16 lg:pr-4">
             <strong className="sm:text-2xl text-red-500">Locations:</strong>
             <ul className="mt-1">
-              <li className="mt-1 flex flex-col gap-1">
+
               {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
                   (PokeTypeProps: PokemonTypeProps) => {
                     idLocation = increment(idLocation)
-                    return (
+                    return(
                       <>
-                        <span key={idLocation}>
-                          {PokeTypeProps.pokemon_v2_ability.name}
-                        </span>
+                        <li 
+                        className="mt-1 flex flex-col gap-1" 
+                        key={idLocation}
+                        >
+                          <span >
+                            {PokeTypeProps.pokemon_v2_ability.name}
+                          </span>
+                        </li>
                       </>
-                    );
+                      );
+                    
                   }
                 )}
                 <span>Cerulean-City-Area</span>
                 <span>Pallet-Town-Area</span>
                 <span>Lumiose-City-Area</span>
-              </li>
+              
             </ul>
 
             <div className="mt-8">

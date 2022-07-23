@@ -10,7 +10,6 @@ export interface PokemonFullInfoProps {
   }
 
 export function Pokemon() {
-
   return (
     <>
       <Header />

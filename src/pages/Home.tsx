@@ -109,7 +109,7 @@ export function Home() {
 
               const typeName = PokeCardProps.pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
               
-              console.log(typeName)
+              // console.log(typeName)
 
               return( 
                 <PokeCard 

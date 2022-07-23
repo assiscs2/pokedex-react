@@ -10,7 +10,7 @@ export function Header() {
     setInputText(lowerCase);
   }
 
-  console.log(inputText)
+  // console.log(inputText)
 
   return (
     <div className="flex justify-center flex-col items-center border border-gray-900">

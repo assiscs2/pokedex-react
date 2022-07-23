@@ -9,7 +9,7 @@ export interface PokemonTypeProps {
 
 export function Element(PokeTypeProps: PokemonTypeProps, PokeCardProps: PokemonCardProps) {
 
-  console.log(PokeTypeProps.abilityName, 'teste?')
+  // console.log(PokeTypeProps.abilityName, 'teste?')
 
   // console.log(bulba.pokemon_v2_pokemontypes.map((element:string, index:string) => {console.log(element, index, 'rola')}), 'oi')
 

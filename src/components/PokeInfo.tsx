@@ -5,11 +5,19 @@ import { gql, useQuery } from "@apollo/client";
 import { pokeId } from "./PokeCard";
 import { PokemonTypeProps } from "./Element";
 import { PokemonCardProps } from "../pages/Home";
+import { increment } from "../libs/increment";
+
+
+
 
 export function PokeInfo() {
+
   const idPokemon = pokeId;
   let idType = 0;
+  let idAbility = 0;
+  let idLocation = 0;
 
+  
   client
     .query({
       query: gql`
@@ -44,12 +52,11 @@ export function PokeInfo() {
       }
     }
   }
-}
-
-      `,
+  }
+   `,
     })
-    .then((result) => result);
-
+    .then((result) => (result));
+  
   const GET_POKEMON_FULL_INFORMATION_BY_ID = gql`
     query getPokemonInformationById($idPokemon: Int) {
   pokemon_v2_pokemon_aggregate(where: {id: {_eq: ${idPokemon}}}) {
@@ -82,8 +89,8 @@ export function PokeInfo() {
       }
     }
   }
-}
-
+  }
+  
   `;
 
   const { data, loading, error } = useQuery(GET_POKEMON_FULL_INFORMATION_BY_ID);
@@ -98,19 +105,12 @@ export function PokeInfo() {
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
 
 
-  console.log(data)
+  console.log(pokeInfo)
   console.log(pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes[0].pokemon_v2_ability.name,"testando");
 
 
-
-  function increment () {
-    idType++
-    return idType;
-  }
-
-
   return (
-    <>
+      <>
       <a href={`/`}>
         <button className="absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors">
           <ArrowFatLeft size={28} weight="fill" color="#C6C4CC" />
@@ -158,7 +158,14 @@ export function PokeInfo() {
               <li className="flex flex-col gap-1 sm:text-1xl">
                 {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
                   (PokeTypeProps: PokemonTypeProps) => {
-                    return <span>{PokeTypeProps.pokemon_v2_ability.name}</span>;
+                    idAbility = increment(idAbility)
+                    return (
+                      <>
+                        <span key={idAbility}>
+                          {PokeTypeProps.pokemon_v2_ability.name}
+                        </span>
+                      </>
+                    );
                   }
                 )}
 
@@ -173,7 +180,14 @@ export function PokeInfo() {
               <li className="mt-1 flex flex-col gap-1">
               {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
                   (PokeTypeProps: PokemonTypeProps) => {
-                    return <span>{PokeTypeProps.pokemon_v2_ability.name}</span>;
+                    idLocation = increment(idLocation)
+                    return (
+                      <>
+                        <span key={idLocation}>
+                          {PokeTypeProps.pokemon_v2_ability.name}
+                        </span>
+                      </>
+                    );
                   }
                 )}
                 <span>Cerulean-City-Area</span>
@@ -220,6 +234,6 @@ export function PokeInfo() {
           </div>
         </div>
       </div>
-    </>
+  </>
   );
 }

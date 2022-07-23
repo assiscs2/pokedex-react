@@ -10,7 +10,7 @@ export let pokeId = 1;
 
 export function setPokeId(pokeId?: number) {
   
-  console.log('cheguei aqui')
+  // console.log('cheguei aqui')
 
   return pokeId;
 }
@@ -22,7 +22,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps
 
   // const [ pokemonInfoId, setPokemonInfoId ] = useState(0);
 
-  console.log(PokeCardProps.typeName, 'teste10-')
+  // console.log(PokeCardProps.typeName, 'teste10-')
   
   return (
     <Link to={`pokemon/${PokeCardProps.id}`}

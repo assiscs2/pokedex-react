@@ -181,20 +181,19 @@ export function PokeInfo() {
           <div className="pt-4 pb-4 lg:pl-16 lg:pr-4">
             <strong className="sm:text-2xl text-red-500">Locations:</strong>
             <ul className="mt-1">
+            <li
+                        className="mt-1 flex flex-col gap-1"
+                        key={idLocation}
+                        >
 
               {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
                   (PokeTypeProps: PokemonTypeProps) => {
                     idLocation = increment(idLocation)
                     return(
                       <>
-                        <li
-                        className="mt-1 flex flex-col gap-1"
-                        key={idLocation}
-                        >
                           <span>
                             {PokeTypeProps.pokemon_v2_ability.name}
                           </span>
-                        </li>
                       </>
                       );
 
@@ -203,7 +202,7 @@ export function PokeInfo() {
                 <span>Cerulean-City-Area</span>
                 <span>Pallet-Town-Area</span>
                 <span>Lumiose-City-Area</span>
-
+                </li>
             </ul>
 
             <div className="mt-8">

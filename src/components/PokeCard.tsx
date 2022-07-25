@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PokemonCardProps } from '../pages/Home';
-import { Element, PokemonTypeProps } from './Element';
+import { PokemonTypeCard, PokemonTypeProps } from './PokemonTypeCard';
 import bulbassaur from '/src/mock-assets/bulbassaur.png'
 
 
@@ -16,6 +16,8 @@ export function setPokeId(pokeId?: number) {
 }
 
 
+
+
 export function PokeCard(PokeCardProps: PokemonCardProps 
   // PokeTypeProps: PokemonTypeProps
   ) {
@@ -23,14 +25,29 @@ export function PokeCard(PokeCardProps: PokemonCardProps
   // const [ pokemonInfoId, setPokemonInfoId ] = useState(0);
 
   // console.log(PokeCardProps.typeName, 'teste10-')
+
+  // function mapPokemonTypes(pokeTypes:any) {
+  //   let pokeTypeId = 0;
+  //   for (let el of pokeTypes) {
+  //     pokeTypeId += 1;
+  //     // console.log(el.pokemon_v2_type.name);
+  //     renderPokemonType(el.pokemon_v2_type.name, pokeTypeId)
+  //   }
+
+  //   return 
+  // }
+
+
+
+  console.log(PokeCardProps.typeName)
   
   return (
-    <Link to={`pokemon/${PokeCardProps.id}`}
-    >
-      <div className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex"
-      onClick={() => {
-        pokeId = PokeCardProps.id  
-      }}    
+    <Link to={`pokemon/${PokeCardProps.id}`}>
+      <div
+        className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex"
+        onClick={() => {
+          pokeId = PokeCardProps.id;
+        }}
       >
         <div className="flex items-center justify-center h-auto w-52">
           <img
@@ -43,13 +60,18 @@ export function PokeCard(PokeCardProps: PokemonCardProps
           <strong className="text-gray-700 bg-gray-100 border-2 border-gray-900 rounded-lg p-1">
             {PokeCardProps.name}
           </strong>
+          <div className="grid gap-2 text-sm">
+            <ul>
+              <li>
+                {/* {PokeCardProps.typeName.pokemon_v2_pokemontypes.forEach((element: any)  => {
+                  let typeName = element.pokemon_v2_type.name;
 
-          <div className="grid gap-2 text-sm">    
+                  console.log(`cheguei teste`, typeName);
 
-              
-            <Element 
-              typeName={PokeCardProps.typeName}
-            />
+                  <PokemonTypeCard typeName={typeName} />
+                 })} */}
+              </li>
+            </ul>
           </div>
         </div>
       </div>

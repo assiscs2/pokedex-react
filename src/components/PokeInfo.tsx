@@ -3,9 +3,11 @@ import { ArrowFatLeft } from "phosphor-react";
 import { client } from "../libs/apollo";
 import { gql, useQuery } from "@apollo/client";
 import { pokeId } from "./PokeCard";
-import { PokemonTypeProps } from "./Element";
-import { PokemonCardProps } from "../pages/Home";
 import { increment } from "../libs/increment";
+import { PokemonFullInfoProps } from "../pages/Pokemon";
+import { PokemonTypeCard } from "./PokemonTypeCard";
+import { renderPokemonType } from "../pages/Home";
+
 
 
 
@@ -43,16 +45,19 @@ export function PokeInfo() {
           pokemon_v2_ability {
             name
           }
-          pokemon_v2_pokemon {
-            pokemon_v2_pokemonsprites {
-              sprites
-            }
-          }
         }
       }
     }
   }
+  pokemon_v2_locationarea_aggregate(where: {id: {_eq: ${idPokemon}}}) {
+    nodes {
+      name
+    }
   }
+  pokemon_v2_pokemonsprites(where: {id: {_eq: ${idPokemon}}}) {
+    sprites
+  }
+}
    `,
     })
     .then((result) => (result));
@@ -80,17 +85,19 @@ export function PokeInfo() {
           pokemon_v2_ability {
             name
           }
-          pokemon_v2_pokemon {
-            pokemon_v2_pokemonsprites {
-              sprites
-            }
-          }
         }
       }
     }
   }
+  pokemon_v2_locationarea_aggregate(where: {id: {_eq: ${idPokemon}}}) {
+    nodes {
+      name
+    }
   }
-
+  pokemon_v2_pokemonsprites(where: {id: {_eq: ${idPokemon}}}) {
+    sprites
+  }
+}
   `;
 
   const { data, loading, error } = useQuery(GET_POKEMON_FULL_INFORMATION_BY_ID);
@@ -102,15 +109,20 @@ export function PokeInfo() {
     return (<> `Error! ${error}` </>);
   }
 
+
+
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
 
+  // const typeName = pokeInfo.pokemon_v2_pokemontypes[1].pokemon_v2_type;
 
-  console.log(pokeInfo)
-  console.log(pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes[0].pokemon_v2_ability.name,"testando");
+  // console.log(data.pokemon_v2_pokemon_aggregate.nodes[0].pokemon_v2_pokemontypes[1].pokemon_v2_type.name)
+  // console.log(data?.pokemon_v2_pokemon_aggregate.nodes[0].pokemon_v2_pokemontypes)
+
+  // console.log(pokeInfo.pokemon_v2_pokemonstats[0]);
 
 
   return (
-      <>
+    <>
       <a href={`/`}>
         <button className="absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors">
           <ArrowFatLeft size={28} weight="fill" color="#C6C4CC" />
@@ -133,19 +145,14 @@ export function PokeInfo() {
               <h1>{pokeInfo.name} </h1>
             </div>
             <ul>
-              <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">
-                {/* {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map((PokeCardProps: PokemonCardProps) => {
-                       {
-                        increment(idType)
-                      return(
-                        <Element
-                        key={idType}
-                        typeName={PokeCardProps.typeName}
-                        />
-                      );
-                    }
+              <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">               
+                 {pokeInfo.pokemon_v2_pokemontypes.forEach((element: any) => {
+                  let typeName = element.pokemon_v2_type.name;
+                  idType = increment(idType);
 
-                })} */}
+                  // console.log(`cheguei coco`, typeName, idType);
+                  renderPokemonType(idType, typeName);
+                 })}             
               </li>
             </ul>
           </div>
@@ -155,54 +162,41 @@ export function PokeInfo() {
               Abilities:
             </span>
             <ul className="mt-1">
-                {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
-                  (PokeTypeProps: PokemonTypeProps) => {
-                    idAbility = increment(idAbility)
-                    return (
-                      <>
-                        <li
+              {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
+                (PokeFullInfoProps: PokemonFullInfoProps) => {
+                  idAbility = increment(idAbility);
+                  return (
+                    <>
+                      <li
                         className="flex flex-col gap-1 sm:text-1xl"
                         key={idAbility}
-                        >
-                          <span >
-                            {PokeTypeProps.pokemon_v2_ability.name}
-                          </span>
-                        </li>
-                      </>
-                    );
+                      >
+                        <span>{PokeFullInfoProps.pokemon_v2_ability.name}</span>
+                      </li>
+                    </>
+                  );
+                }
+              )}
 
-                  }
-                )}
-
-                {/* <span>{pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes[0].pokemon_v2_ability.name}</span> */}
+              {/* <span>{pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes[0].pokemon_v2_ability.name}</span> */}
             </ul>
           </div>
 
           <div className="pt-4 pb-4 lg:pl-16 lg:pr-4">
             <strong className="sm:text-2xl text-red-500">Locations:</strong>
             <ul className="mt-1">
-            <li
-                        className="mt-1 flex flex-col gap-1"
-                        key={idLocation}
-                        >
-
-              {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
-                  (PokeTypeProps: PokemonTypeProps) => {
-                    idLocation = increment(idLocation)
-                    return(
+              <li className="mt-1 flex flex-col gap-1" key={idLocation}>
+                {data.pokemon_v2_locationarea_aggregate.nodes.map(
+                  (PokeFullInfoProps: PokemonFullInfoProps) => {
+                    idLocation = increment(idLocation);
+                    return (
                       <>
-                          <span>
-                            {PokeTypeProps.pokemon_v2_ability.name}
-                          </span>
+                        <span>{PokeFullInfoProps.name}</span>
                       </>
-                      );
-
+                    );
                   }
                 )}
-                <span>Cerulean-City-Area</span>
-                <span>Pallet-Town-Area</span>
-                <span>Lumiose-City-Area</span>
-                </li>
+              </li>
             </ul>
 
             <div className="mt-8">
@@ -211,38 +205,38 @@ export function PokeInfo() {
               <div className="mt-2 flex flex-col lg:grid grid-cols-2 mr-2 gap-x-4">
                 <div className="flex gap-1 mb-1">
                   <strong>HP:</strong>
-                  <span>45</span>
+                  <span>{pokeInfo.pokemon_v2_pokemonstats[0].base_stat}</span>
                 </div>
 
                 <div className="flex gap-1 mb-1">
                   <strong>ATTACK:</strong>
-                  <span>49</span>
+                  <span>{pokeInfo.pokemon_v2_pokemonstats[1].base_stat}</span>
                 </div>
 
                 <div className="flex gap-1 mb-1">
                   <strong>DEFENSE:</strong>
-                  <span>49</span>
+                  <span>{pokeInfo.pokemon_v2_pokemonstats[2].base_stat}</span>
                 </div>
 
                 <div className="flex gap-1 mb-1">
                   <strong>SPECIAL-ATTACK:</strong>
-                  <span>65</span>
+                  <span>{pokeInfo.pokemon_v2_pokemonstats[3].base_stat}</span>
                 </div>
 
                 <div className="flex gap-1 mb-1">
                   <strong>SPECIAL-DEFENSE:</strong>
-                  <span>65</span>
+                  <span>{pokeInfo.pokemon_v2_pokemonstats[4].base_stat}</span>
                 </div>
 
                 <div className="flex gap-1 mb-1">
                   <strong>SPEED:</strong>
-                  <span>45</span>
+                  <span>{pokeInfo.pokemon_v2_pokemonstats[5].base_stat}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-  </>
+    </>
   );
 }

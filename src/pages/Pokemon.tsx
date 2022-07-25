@@ -7,6 +7,9 @@ import { PokeInfo } from "../components/PokeInfo";
 export interface PokemonFullInfoProps {
   id: number;
   name: string;
+  abilityName?: string;
+  location: string;
+  pokemon_v2_ability?: any;
   }
 
 export function Pokemon() {

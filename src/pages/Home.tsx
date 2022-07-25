@@ -2,7 +2,7 @@ import { Header } from "../components/Header";
 import { PokeCard } from "../components/PokeCard";
 import { useQuery, gql } from '@apollo/client';
 import { client } from '../libs/apollo';
-import { PokemonTypeProps } from "../components/Element";
+import { PokemonTypeCard, PokemonTypeProps } from "../components/PokemonTypeCard";
 
 export interface PokemonCardQuery {
   pokemon_v2_pokemon_aggregate: {
@@ -49,7 +49,7 @@ client
 
  const GET_POKEMONS_LIST = gql`
    query getPokemonCardsList {
-     pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 33, offset: 0) {
+     pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 12, offset: 0) {
        nodes {
          id
          name
@@ -80,7 +80,7 @@ export interface PokemonCardProps {
   id: number;
   name: string;
   pokemon_species_id: number;
-  typeName: string ;
+  typeName?: string ;
 }
 
   // typeName: { pokemon_v2_pokemontypes: [ pokemon_v2_type: { name: string } ]};
@@ -93,11 +93,22 @@ export interface PokemonCardProps {
 
   // console.log(teste, 'aro')
 
+  export function renderPokemonType(key: number, typeName: string) {
+    console.log(`cheguei coco`, typeName, key)
+    return (
+      <>
+        <PokemonTypeCard key={key} typeName={typeName} />
+      </>
+    );
+  }
+
 export function Home() {
 
   const { data } = useQuery(GET_POKEMONS_LIST);
 
   //  console.log(data?.pokemon_v2_pokemon_aggregate.nodes[1].pokemon_v2_pokemontypes[0].pokemon_v2_type.name, 'teste')
+
+
 
   return (
     <>
@@ -107,7 +118,7 @@ export function Home() {
           <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
             {data?.pokemon_v2_pokemon_aggregate.nodes.map((PokeCardProps: PokemonCardProps, PokeTypeProps: PokemonTypeProps) => {
 
-              const typeName = PokeCardProps.pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
+              // const typeName = PokeCardProps.pokemon_v2_pokemontypes[0].pokemon_v2_type.name
               
               // console.log(typeName)
 
@@ -117,7 +128,7 @@ export function Home() {
                   id={PokeCardProps.id}
                   name={PokeCardProps.name}
                   pokemon_species_id={PokeCardProps.pokemon_species_id}
-                  typeName={typeName}
+                  // typeName={pokeTypes}
                   />
               )
             }

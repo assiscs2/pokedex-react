@@ -152,7 +152,9 @@ export function PokeInfo() {
 
                   // console.log(`cheguei coco`, typeName, idType);
                   renderPokemonType(idType, typeName);
-                 })}             
+                 })}   
+
+                 <PokemonTypeCard key={1} typeName={'Placeholder'}/>          
               </li>
             </ul>
           </div>

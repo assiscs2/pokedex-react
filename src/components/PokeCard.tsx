@@ -70,6 +70,8 @@ export function PokeCard(PokeCardProps: PokemonCardProps
 
                   <PokemonTypeCard typeName={typeName} />
                  })} */}
+
+                 <PokemonTypeCard key={1} typeName={`Placeholder`}/>
               </li>
             </ul>
           </div>

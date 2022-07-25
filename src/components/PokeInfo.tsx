@@ -17,7 +17,7 @@ export function PokeInfo() {
   let idAbility = 0;
   let idLocation = 0;
 
-  
+
   client
     .query({
       query: gql`
@@ -56,7 +56,7 @@ export function PokeInfo() {
    `,
     })
     .then((result) => (result));
-  
+
   const GET_POKEMON_FULL_INFORMATION_BY_ID = gql`
     query getPokemonInformationById($idPokemon: Int) {
   pokemon_v2_pokemon_aggregate(where: {id: {_eq: ${idPokemon}}}) {
@@ -90,16 +90,16 @@ export function PokeInfo() {
     }
   }
   }
-  
+
   `;
 
   const { data, loading, error } = useQuery(GET_POKEMON_FULL_INFORMATION_BY_ID);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (<> <p>Loading...</p></>);
   }
   if (error) {
-    return `Error! ${error}`;
+    return (<> `Error! ${error}` </>);
   }
 
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
@@ -136,15 +136,15 @@ export function PokeInfo() {
               <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">
                 {/* {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map((PokeCardProps: PokemonCardProps) => {
                        {
-                        increment()
+                        increment(idType)
                       return(
                         <Element
                         key={idType}
                         typeName={PokeCardProps.typeName}
-                        /> 
+                        />
                       );
                     }
-                  
+
                 })} */}
               </li>
             </ul>
@@ -160,7 +160,7 @@ export function PokeInfo() {
                     idAbility = increment(idAbility)
                     return (
                       <>
-                        <li 
+                        <li
                         className="flex flex-col gap-1 sm:text-1xl"
                         key={idAbility}
                         >
@@ -187,23 +187,23 @@ export function PokeInfo() {
                     idLocation = increment(idLocation)
                     return(
                       <>
-                        <li 
-                        className="mt-1 flex flex-col gap-1" 
+                        <li
+                        className="mt-1 flex flex-col gap-1"
                         key={idLocation}
                         >
-                          <span >
+                          <span>
                             {PokeTypeProps.pokemon_v2_ability.name}
                           </span>
                         </li>
                       </>
                       );
-                    
+
                   }
                 )}
                 <span>Cerulean-City-Area</span>
                 <span>Pallet-Town-Area</span>
                 <span>Lumiose-City-Area</span>
-              
+
             </ul>
 
             <div className="mt-8">

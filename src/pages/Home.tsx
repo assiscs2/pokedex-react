@@ -49,7 +49,7 @@ client
 
  const GET_POKEMONS_LIST = gql`
    query getPokemonCardsList {
-     pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 12, offset: 0) {
+     pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 33, offset: 0) {
        nodes {
          id
          name

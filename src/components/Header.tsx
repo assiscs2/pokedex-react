@@ -26,7 +26,7 @@ export function Header() {
 
       <div className="bg-gray-100 w-[100vw] flex items-center justify-center h-16 gap-2">
         <input
-          className="border-2 border-gray-800 rounded-md max-w-xl w-52 sm:w-[320px] pl-2 text-gray-800 placeholder:text-gray-700 font-sans placeholder:font-sans"
+          className="border-2 border-gray-800 rounded-md max-w-xl w-52 sm:w-[320px] pl-2 placeholder:text-gray-400 text-gray-700 font-sans placeholder:font-sans"
           type="text"
           placeholder="Quem é esse pokémon?"
           onChange={inputHandler}

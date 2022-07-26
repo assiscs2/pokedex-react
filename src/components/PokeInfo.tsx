@@ -110,6 +110,14 @@ export function PokeInfo() {
   }
 
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
+  // console.log(data.pokemon_v2_pokemonsprites[0].sprites.split(" "))
+
+  const removeFullPokeLinkEdges = data.pokemon_v2_pokemonsprites[0].sprites.split(" ")
+  // const pokeFullImageLink = pokeImage[33].slice(1).slice(0, pokeImage[33].length - 5)
+
+  const fullPokeImage = removeFullPokeLinkEdges[33].slice(1).slice(0, removeFullPokeLinkEdges[33].length - 5)
+
+  console.log(fullPokeImage, "Teste")
 
   return (
     <>
@@ -123,7 +131,7 @@ export function PokeInfo() {
         <div className="flex sm:items-start justify-center">
           <img
             className="min-h-[185px] min-w-[185px] h-max w-max sm:mt-8"
-            src={bulbassaurPage}
+            src={fullPokeImage}
             alt="Imagem de um Bulbasaur"
           />
         </div>

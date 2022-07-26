@@ -75,6 +75,8 @@ export interface PokemonCardProps {
   typeName?: any;
   pokemon_v2_pokemon_aggregate?: any;
   pokeInfo?: any;
+  pokeImage: string;
+  pokemon_v2_pokemonsprites?: any;
 }
 
 export function Home() {
@@ -99,7 +101,7 @@ export function Home() {
       <Header />
       <div className="mt-8 flex justify-center">
         <ul>
-          <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
+          <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 mx-4 mb-12">
             {data?.pokemon_v2_pokemon_aggregate.nodes.map(
               (PokeCardProps: PokemonCardProps) => {
                 return (
@@ -109,6 +111,9 @@ export function Home() {
                     name={PokeCardProps.name}
                     pokemon_species_id={PokeCardProps.pokemon_species_id}
                     pokeInfo={PokeCardProps.pokemon_v2_pokemontypes}
+                    pokeImage={
+                      PokeCardProps.pokemon_v2_pokemonsprites[0].sprites
+                    }
                   />
                 );
               }

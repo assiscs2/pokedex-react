@@ -14,6 +14,11 @@ export function setPokeId(pokeId?: number) {
 export function PokeCard(PokeCardProps: PokemonCardProps) {
   let idTypeCard = 0;
 
+  const removeEdgesImage = PokeCardProps.pokeImage.split(" ");
+  const pokeCardImage = removeEdgesImage[1]
+    .slice(1)
+    .slice(0, removeEdgesImage[1].length - 3);
+
   return (
     <Link to={`pokemon/${PokeCardProps.id}`}>
       <div
@@ -25,12 +30,12 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
         <div className="flex items-center justify-center h-auto w-52">
           <img
             className="h-60 max-h-60 border-r-4 border-gray-900 overflow-hidden"
-            src={bulbassaur}
+            src={pokeCardImage}
             alt="Imagem de um Bullbassaur"
           />
         </div>
-        <div className="bg-red-500 flex-1 overflow-hidden rounded-r-md text-gray-800 flex items-center flex-col h-full justify-evenly">
-          <strong className="text-gray-700 bg-gray-100 border-2 border-gray-900 rounded-lg p-1">
+        <div className="bg-red-500 flex-1 rounded-r-md text-gray-800 flex items-center flex-col h-full justify-evenly min-w-[114px]">
+          <strong className="text-gray-700 bg-gray-100 border-2 border-gray-900 rounded-lg p-1 mx-2">
             {PokeCardProps.name}
           </strong>
           <div className="grid gap-2 text-sm">

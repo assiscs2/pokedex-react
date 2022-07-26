@@ -6,7 +6,6 @@ import { pokeId } from "./PokeCard";
 import { increment } from "../libs/increment";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
 import { PokemonTypeCard } from "./PokemonTypeCard";
-import { renderPokemonType } from "../pages/Home";
 
 
 
@@ -146,15 +145,16 @@ export function PokeInfo() {
             </div>
             <ul>
               <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">               
-                 {pokeInfo.pokemon_v2_pokemontypes.forEach((element: any) => {
-                  let typeName = element.pokemon_v2_type.name;
-                  idType = increment(idType);
+                 {pokeInfo.pokemon_v2_pokemontypes.map((PokeFullInfoProps: PokemonFullInfoProps) => {
+                   let typeName = PokeFullInfoProps.pokemon_v2_type.name;
+                   idType = increment(idType);
 
-                  // console.log(`cheguei coco`, typeName, idType);
-                  renderPokemonType(idType, typeName);
-                 })}   
+                   return (
+                    <PokemonTypeCard key={1} typeName={typeName}/>
+                   );
+                 })
 
-                 <PokemonTypeCard key={1} typeName={'Placeholder'}/>          
+                 }
               </li>
             </ul>
           </div>

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { increment } from '../libs/increment';
 import { PokemonCardProps } from '../pages/Home';
+import { PokemonFullInfoProps } from '../pages/Pokemon';
 import { PokemonTypeCard, PokemonTypeProps } from './PokemonTypeCard';
 import bulbassaur from '/src/mock-assets/bulbassaur.png'
 
@@ -22,6 +24,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps
   // PokeTypeProps: PokemonTypeProps
   ) {
 
+    let idTypeCard = 0;
   // const [ pokemonInfoId, setPokemonInfoId ] = useState(0);
 
   // console.log(PokeCardProps.typeName, 'teste10-')
@@ -36,10 +39,8 @@ export function PokeCard(PokeCardProps: PokemonCardProps
 
   //   return 
   // }
-
-
-
-  console.log(PokeCardProps.typeName)
+  
+  // console.log(PokeCardProps.pokeInfo, "aqui")
   
   return (
     <Link to={`pokemon/${PokeCardProps.id}`}>
@@ -62,16 +63,19 @@ export function PokeCard(PokeCardProps: PokemonCardProps
           </strong>
           <div className="grid gap-2 text-sm">
             <ul>
-              <li>
-                {/* {PokeCardProps.typeName.pokemon_v2_pokemontypes.forEach((element: any)  => {
-                  let typeName = element.pokemon_v2_type.name;
+              <li className='flex flex-col gap-2'>
+              {PokeCardProps.pokeInfo.map((PokeFullInfoProps: PokemonFullInfoProps) => {
+                   let typeName = PokeFullInfoProps.pokemon_v2_type.name;
+                  //  console.log(PokeCardProps.typeName, 'Cheguei teste card')
+                   idTypeCard = increment(idTypeCard);
 
-                  console.log(`cheguei teste`, typeName);
+                   return (
+                    <PokemonTypeCard key={idTypeCard} typeName={typeName}/>
+                   );
+                 })
 
-                  <PokemonTypeCard typeName={typeName} />
-                 })} */}
-
-                 <PokemonTypeCard key={1} typeName={`Placeholder`}/>
+                 }
+                 {/* <PokemonTypeCard key={1} typeName={'Placeholder'}/> */}
               </li>
             </ul>
           </div>

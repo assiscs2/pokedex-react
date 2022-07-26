@@ -22,7 +22,7 @@ export interface PokemonTypeProps {
 
 export function PokemonTypeCard (PokeTypeProps: PokemonTypeProps) {
 
-  console.log('cheguei 2', PokeTypeProps.typeName)
+  // console.log('cheguei 2', PokeTypeProps.typeName)
   return (
     <span className="bg-green-400 border-2 border-gray-900 rounded-lg px-2 py-1 font-semibold flex items-center justify-center bg-opacity-80 hover:bg-opacity-100 transition-opacity text-gray-900">
       {PokeTypeProps.typeName}

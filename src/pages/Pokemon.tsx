@@ -10,6 +10,8 @@ export interface PokemonFullInfoProps {
   abilityName?: string;
   location: string;
   pokemon_v2_ability?: any;
+  typeName: any;
+  pokemon_v2_type: any;
   }
 
 export function Pokemon() {

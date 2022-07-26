@@ -7,17 +7,11 @@ import { increment } from "../libs/increment";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
 import { PokemonTypeCard } from "./PokemonTypeCard";
 
-
-
-
-
 export function PokeInfo() {
-
   const idPokemon = pokeId;
   let idType = 0;
   let idAbility = 0;
   let idLocation = 0;
-
 
   client
     .query({
@@ -59,7 +53,7 @@ export function PokeInfo() {
 }
    `,
     })
-    .then((result) => (result));
+    .then((result) => result);
 
   const GET_POKEMON_FULL_INFORMATION_BY_ID = gql`
     query getPokemonInformationById($idPokemon: Int) {
@@ -102,23 +96,20 @@ export function PokeInfo() {
   const { data, loading, error } = useQuery(GET_POKEMON_FULL_INFORMATION_BY_ID);
 
   if (loading) {
-    return (<> <p>Loading...</p></>);
+    return (
+      <>
+        {" "}
+        <div className="flex flex-col items-center justify-center mt-[38vh]">
+          <p>Loading...</p>
+        </div>
+      </>
+    );
   }
   if (error) {
-    return (<> `Error! ${error}` </>);
+    return <> `Error! ${error}` </>;
   }
 
-
-
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
-
-  // const typeName = pokeInfo.pokemon_v2_pokemontypes[1].pokemon_v2_type;
-
-  // console.log(data.pokemon_v2_pokemon_aggregate.nodes[0].pokemon_v2_pokemontypes[1].pokemon_v2_type.name)
-  // console.log(data?.pokemon_v2_pokemon_aggregate.nodes[0].pokemon_v2_pokemontypes)
-
-  // console.log(pokeInfo.pokemon_v2_pokemonstats[0]);
-
 
   return (
     <>
@@ -144,17 +135,15 @@ export function PokeInfo() {
               <h1>{pokeInfo.name} </h1>
             </div>
             <ul>
-              <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">               
-                 {pokeInfo.pokemon_v2_pokemontypes.map((PokeFullInfoProps: PokemonFullInfoProps) => {
-                   let typeName = PokeFullInfoProps.pokemon_v2_type.name;
-                   idType = increment(idType);
+              <li className="flex flex-col gap-2 items-center md:flex md:flex-row md:justify-center">
+                {pokeInfo.pokemon_v2_pokemontypes.map(
+                  (PokeFullInfoProps: PokemonFullInfoProps) => {
+                    let typeName = PokeFullInfoProps.pokemon_v2_type.name;
+                    idType = increment(idType);
 
-                   return (
-                    <PokemonTypeCard key={1} typeName={typeName}/>
-                   );
-                 })
-
-                 }
+                    return <PokemonTypeCard key={1} typeName={typeName} />;
+                  }
+                )}
               </li>
             </ul>
           </div>
@@ -179,8 +168,6 @@ export function PokeInfo() {
                   );
                 }
               )}
-
-              {/* <span>{pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes[0].pokemon_v2_ability.name}</span> */}
             </ul>
           </div>
 

@@ -1,47 +1,19 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { increment } from '../libs/increment';
-import { PokemonCardProps } from '../pages/Home';
-import { PokemonFullInfoProps } from '../pages/Pokemon';
-import { PokemonTypeCard, PokemonTypeProps } from './PokemonTypeCard';
-import bulbassaur from '/src/mock-assets/bulbassaur.png'
+import { Link } from "react-router-dom";
+import { increment } from "../libs/increment";
+import { PokemonCardProps } from "../pages/Home";
+import { PokemonFullInfoProps } from "../pages/Pokemon";
+import { PokemonTypeCard, PokemonTypeProps } from "./PokemonTypeCard";
+import bulbassaur from "/src/mock-assets/bulbassaur.png";
 
-
-
-export let pokeId = 1; 
+export let pokeId = 1;
 
 export function setPokeId(pokeId?: number) {
-  
-  // console.log('cheguei aqui')
-
   return pokeId;
 }
 
+export function PokeCard(PokeCardProps: PokemonCardProps) {
+  let idTypeCard = 0;
 
-
-
-export function PokeCard(PokeCardProps: PokemonCardProps 
-  // PokeTypeProps: PokemonTypeProps
-  ) {
-
-    let idTypeCard = 0;
-  // const [ pokemonInfoId, setPokemonInfoId ] = useState(0);
-
-  // console.log(PokeCardProps.typeName, 'teste10-')
-
-  // function mapPokemonTypes(pokeTypes:any) {
-  //   let pokeTypeId = 0;
-  //   for (let el of pokeTypes) {
-  //     pokeTypeId += 1;
-  //     // console.log(el.pokemon_v2_type.name);
-  //     renderPokemonType(el.pokemon_v2_type.name, pokeTypeId)
-  //   }
-
-  //   return 
-  // }
-  
-  // console.log(PokeCardProps.pokeInfo, "aqui")
-  
   return (
     <Link to={`pokemon/${PokeCardProps.id}`}>
       <div
@@ -63,19 +35,18 @@ export function PokeCard(PokeCardProps: PokemonCardProps
           </strong>
           <div className="grid gap-2 text-sm">
             <ul>
-              <li className='flex flex-col gap-2'>
-              {PokeCardProps.pokeInfo.map((PokeFullInfoProps: PokemonFullInfoProps) => {
-                   let typeName = PokeFullInfoProps.pokemon_v2_type.name;
-                  //  console.log(PokeCardProps.typeName, 'Cheguei teste card')
-                   idTypeCard = increment(idTypeCard);
+              <li className="flex flex-col gap-2">
+                {PokeCardProps.pokeInfo.map(
+                  (PokeFullInfoProps: PokemonFullInfoProps) => {
+                    let typeName = PokeFullInfoProps.pokemon_v2_type.name;
 
-                   return (
-                    <PokemonTypeCard key={idTypeCard} typeName={typeName}/>
-                   );
-                 })
+                    idTypeCard = increment(idTypeCard);
 
-                 }
-                 {/* <PokemonTypeCard key={1} typeName={'Placeholder'}/> */}
+                    return (
+                      <PokemonTypeCard key={idTypeCard} typeName={typeName} />
+                    );
+                  }
+                )}
               </li>
             </ul>
           </div>
@@ -84,4 +55,3 @@ export function PokeCard(PokeCardProps: PokemonCardProps
     </Link>
   );
 }
-

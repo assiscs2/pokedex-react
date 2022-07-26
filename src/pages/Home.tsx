@@ -3,7 +3,6 @@ import { PokeCard } from "../components/PokeCard";
 import { useQuery, gql } from "@apollo/client";
 import { client } from "../libs/apollo";
 
-
 export interface PokemonCardQuery {
   pokemon_v2_pokemon_aggregate: {
     nodes: {
@@ -79,16 +78,21 @@ export interface PokemonCardProps {
 }
 
 export function Home() {
-  const { data, loading,  error } = useQuery(GET_POKEMONS_LIST);
+  const { data, loading, error } = useQuery(GET_POKEMONS_LIST);
 
   if (loading) {
-    return (<> <div className="flex flex-col items-center justify-center mt-[48vh] transition-all"><p>Loading...</p></div></>);
+    return (
+      <>
+        {" "}
+        <div className="flex flex-col items-center justify-center mt-[48vh]">
+          <p>Loading...</p>
+        </div>
+      </>
+    );
   }
   if (error) {
-    return (<> `Error! ${error}` </>);
+    return <> `Error! ${error}` </>;
   }
-
-  //  console.log(data?.pokemon_v2_pokemon_aggregate.nodes[1].pokemon_v2_pokemontypes[0].pokemon_v2_type.name, 'teste')
 
   return (
     <>
@@ -97,12 +101,7 @@ export function Home() {
         <ul>
           <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
             {data?.pokemon_v2_pokemon_aggregate.nodes.map(
-              (
-                PokeCardProps: PokemonCardProps,
-              ) => {
-                // console.log(PokeCardProps.pokemon_v2_pokemontypes, 'teste')
-                // console.log(PokeCardProps.pokemon_v2_pokemon_aggregate.nodes[0].pokemon_v2_pokemontypes);
-
+              (PokeCardProps: PokemonCardProps) => {
                 return (
                   <PokeCard
                     key={PokeCardProps.id}

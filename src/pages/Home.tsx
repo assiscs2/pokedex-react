@@ -131,6 +131,7 @@ export function Home() {
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
         <button
           disabled={counter === 0 || loading}
+          className='disabled:opacity-40'
           onClick={() => {
             setCounter((queryLimit = counter - 12));
             setPageCounter(pageCounter - 1);
@@ -151,6 +152,7 @@ export function Home() {
         </span>
         <button
           disabled={loading}
+          className='disabled:opacity-40'
           onClick={() => {
             setCounter((queryLimit = counter + 12));
             setPageCounter(pageCounter + 1);

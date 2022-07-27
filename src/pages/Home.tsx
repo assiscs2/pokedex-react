@@ -1,7 +1,10 @@
-import { Header } from "../components/Header";
+import { globalInput, Header } from "../components/Header";
 import { PokeCard } from "../components/PokeCard";
 import { useQuery, gql } from "@apollo/client";
 import { client } from "../libs/apollo";
+import { useState } from "react";
+import { CaretLeft, CaretRight } from "phosphor-react";
+import { Loading } from "../components/Loading";
 
 export interface PokemonCardQuery {
   pokemon_v2_pokemon_aggregate: {
@@ -18,14 +21,25 @@ export interface PokemonCardQuery {
   };
 }
 
-client
-  .query({
-    query: gql`
+let queryLimit = 0;
+export let testQuery = "";
+
+// function getMorePokemons(value: number) {
+// queryOffset = value + 12;
+
+// }
+
+function getPokemonsListQuery() {
+  console.log(queryLimit, "fiz a query?");
+
+  client
+    .query({
+      query: gql`
       query getPokemonCardsList {
         pokemon_v2_pokemon_aggregate(
           order_by: { id: asc }
-          limit: 33
-          offset: 0
+          limit: 12
+          offset: ${queryLimit}
         ) {
           nodes {
             id
@@ -43,12 +57,12 @@ client
         }
       }
     `,
-  })
-  .then((result) => result);
+    })
+    .then((result) => result);
 
-const GET_POKEMONS_LIST = gql`
+  const GET_POKEMONS_LIST = gql`
   query getPokemonCardsList {
-    pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 33, offset: 0) {
+    pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 12, offset: ${queryLimit}) {
       nodes {
         id
         name
@@ -66,6 +80,9 @@ const GET_POKEMONS_LIST = gql`
   }
 `;
 
+  return GET_POKEMONS_LIST;
+}
+
 export interface PokemonCardProps {
   pokemon_v2_pokemontypes?: any;
   key: number;
@@ -79,19 +96,31 @@ export interface PokemonCardProps {
   pokemon_v2_pokemonsprites?: any;
 }
 
-export function Home() {
-  const { data, loading, error } = useQuery(GET_POKEMONS_LIST);
+// console.log(counter, " ainda não cheguei")
 
-  if (loading) {
-    return (
-      <>
-        {" "}
-        <div className="flex flex-col items-center justify-center mt-[48vh]">
-          <p>Loading...</p>
-        </div>
-      </>
-    );
-  }
+// function addPokemonsToList() {
+//   queryOffset = queryOffset + 12;
+//   console.log(queryOffset, "cheguei")
+//   getPokemonsListQuery(queryOffset)
+// }
+
+export function Home() {
+  const queryInput = globalInput;
+  // console.log(queryInput, "estou aqui");
+
+  const { data, loading, error } = useQuery(getPokemonsListQuery());
+
+  const [counter, setCounter] = useState(0);
+  const [pageCounter, setPageCounter] = useState(1);
+
+  // if (loading) {
+  //   return (
+  //     <>
+  //       {" "}
+  //       <Loading />
+  //     </>
+  //   );
+  // }
   if (error) {
     return <> `Error! ${error}` </>;
   }
@@ -99,28 +128,76 @@ export function Home() {
   return (
     <>
       <Header />
-      <div className="mt-8 flex justify-center">
-        <ul>
-          <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 mx-4 mb-12">
-            {data?.pokemon_v2_pokemon_aggregate.nodes.map(
-              (PokeCardProps: PokemonCardProps) => {
-                return (
-                  <PokeCard
-                    key={PokeCardProps.id}
-                    id={PokeCardProps.id}
-                    name={PokeCardProps.name}
-                    pokemon_species_id={PokeCardProps.pokemon_species_id}
-                    pokeInfo={PokeCardProps.pokemon_v2_pokemontypes}
-                    pokeImage={
-                      PokeCardProps.pokemon_v2_pokemonsprites[0].sprites
-                    }
-                  />
-                );
-              }
-            )}
-          </li>
-        </ul>
+      <div className="flex items-center justify-center pt-4 gap-8 text-xs">
+        <button
+          disabled={counter === 0 || loading}
+          onClick={() => {
+            setCounter((queryLimit = counter - 12));
+            setPageCounter(pageCounter - 1);
+          }}
+        >
+          <CaretLeft
+            size={20}
+            color="#c6c4cc"
+            weight="fill"
+            className="inline mb-0.5"
+          />
+          Previous Page
+        </button>
+        <span>
+          {"|                       " +
+            pageCounter +
+            "                       |"}
+        </span>
+        <button
+          disabled={loading}
+          onClick={() => {
+            setCounter((queryLimit = counter + 12));
+            setPageCounter(pageCounter + 1);
+          }}
+        >
+          Next Page{" "}
+          <CaretRight
+            size={20}
+            color="#c6c4cc"
+            weight="fill"
+            className="inline mb-0.5"
+          />
+        </button>
       </div>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="mt-3.5 flex justify-center">
+          <ul>
+            <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 mx-4 mb-12">
+              {data?.pokemon_v2_pokemon_aggregate.nodes
+                .filter((card: any) => {
+                  if (queryInput === "") {
+                    return card;
+                  } else if (card.name.includes(queryInput.toLowerCase())) {
+                    return card;
+                  }
+                })
+                .map((PokeCardProps: PokemonCardProps) => {
+                  return (
+                    <PokeCard
+                      key={PokeCardProps.id}
+                      id={PokeCardProps.id}
+                      name={PokeCardProps.name}
+                      pokemon_species_id={PokeCardProps.pokemon_species_id}
+                      pokeInfo={PokeCardProps.pokemon_v2_pokemontypes}
+                      pokeImage={
+                        PokeCardProps.pokemon_v2_pokemonsprites[0].sprites
+                      }
+                    />
+                  );
+                })}
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 }

@@ -1,11 +1,11 @@
-import bulbassaurPage from "/src/mock-assets/bulbassaurPage.png";
 import { ArrowFatLeft } from "phosphor-react";
 import { client } from "../libs/apollo";
 import { gql, useQuery } from "@apollo/client";
 import { pokeId } from "./PokeCard";
-import { increment } from "../libs/increment";
+import { HandleIncrementId } from "../hooks/HandleIncrementId";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
 import { PokemonTypeCard } from "./PokemonTypeCard";
+import { Loading } from "./Loading";
 
 export function PokeInfo() {
   const idPokemon = pokeId;
@@ -99,9 +99,7 @@ export function PokeInfo() {
     return (
       <>
         {" "}
-        <div className="flex flex-col items-center justify-center mt-[38vh]">
-          <p>Loading...</p>
-        </div>
+        <Loading />
       </>
     );
   }
@@ -147,7 +145,7 @@ export function PokeInfo() {
                 {pokeInfo.pokemon_v2_pokemontypes.map(
                   (PokeFullInfoProps: PokemonFullInfoProps) => {
                     let typeName = PokeFullInfoProps.pokemon_v2_type.name;
-                    idType = increment(idType);
+                    idType = HandleIncrementId(idType);
 
                     return <PokemonTypeCard key={1} typeName={typeName} />;
                   }
@@ -163,7 +161,7 @@ export function PokeInfo() {
             <ul className="mt-1">
               {pokeInfo.pokemon_v2_pokemonabilities_aggregate.nodes.map(
                 (PokeFullInfoProps: PokemonFullInfoProps) => {
-                  idAbility = increment(idAbility);
+                  idAbility = HandleIncrementId(idAbility);
                   return (
                     <>
                       <li
@@ -185,10 +183,11 @@ export function PokeInfo() {
               <li className="mt-1 flex flex-col gap-1" key={idLocation}>
                 {data.pokemon_v2_locationarea_aggregate.nodes.map(
                   (PokeFullInfoProps: PokemonFullInfoProps) => {
-                    idLocation = increment(idLocation);
+                    let filteredLocation = PokeFullInfoProps.name.replace(/-/g," ");
+                    idLocation = HandleIncrementId(idLocation);
                     return (
                       <>
-                        <span>{PokeFullInfoProps.name}</span>
+                        <span>{filteredLocation}</span>
                       </>
                     );
                   }

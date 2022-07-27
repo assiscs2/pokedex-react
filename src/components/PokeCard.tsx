@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import { increment } from "../libs/increment";
+import { HandleIncrementId } from "../hooks/HandleIncrementId";
 import { PokemonCardProps } from "../pages/Home";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
-import { PokemonTypeCard, PokemonTypeProps } from "./PokemonTypeCard";
-import bulbassaur from "/src/mock-assets/bulbassaur.png";
+import { PokemonTypeCard } from "./PokemonTypeCard";
 
 export let pokeId = 1;
 
-export function setPokeId(pokeId?: number) {
-  return pokeId;
-}
+// export function setPokeId(pokeId?: number) {
+//   return pokeId;
+// }
 
 export function PokeCard(PokeCardProps: PokemonCardProps) {
   let idTypeCard = 0;
@@ -31,7 +30,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
           <img
             className="h-60 max-h-60 border-r-4 border-gray-900 overflow-hidden"
             src={pokeCardImage}
-            alt="Imagem de um Bullbassaur"
+            alt={`imagem de um ${PokeCardProps.name}`}
           />
         </div>
         <div className="bg-red-500 flex-1 rounded-r-md text-gray-800 flex items-center flex-col h-full justify-evenly min-w-[114px]">
@@ -45,7 +44,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
                   (PokeFullInfoProps: PokemonFullInfoProps) => {
                     let typeName = PokeFullInfoProps.pokemon_v2_type.name;
 
-                    idTypeCard = increment(idTypeCard);
+                    idTypeCard = HandleIncrementId(idTypeCard);
 
                     return (
                       <PokemonTypeCard key={idTypeCard} typeName={typeName} />

@@ -21,17 +21,16 @@ export interface PokemonCardQuery {
   };
 }
 
-let queryLimit = 0;
-export let testQuery = "";
+let queryOffset = 0;
+let lastSeenPokemonId = 1;
+let roundedId = 1;
+export let loadedAPokemon = false;
 
-// function getMorePokemons(value: number) {
-// queryOffset = value + 12;
-
-// }
+export function setLoadedAPokemon() {
+  return (loadedAPokemon = true);
+}
 
 function getPokemonsListQuery() {
-  console.log(queryLimit, "fiz a query?");
-
   client
     .query({
       query: gql`
@@ -39,7 +38,7 @@ function getPokemonsListQuery() {
         pokemon_v2_pokemon_aggregate(
           order_by: { id: asc }
           limit: 12
-          offset: ${queryLimit}
+          offset: ${queryOffset}
         ) {
           nodes {
             id
@@ -62,7 +61,7 @@ function getPokemonsListQuery() {
 
   const GET_POKEMONS_LIST = gql`
   query getPokemonCardsList {
-    pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 12, offset: ${queryLimit}) {
+    pokemon_v2_pokemon_aggregate(order_by: { id: asc }, limit: 12, offset: ${queryOffset}) {
       nodes {
         id
         name
@@ -96,31 +95,32 @@ export interface PokemonCardProps {
   pokemon_v2_pokemonsprites?: any;
 }
 
-// console.log(counter, " ainda não cheguei")
-
-// function addPokemonsToList() {
-//   queryOffset = queryOffset + 12;
-//   console.log(queryOffset, "cheguei")
-//   getPokemonsListQuery(queryOffset)
-// }
+export function getSaveState(savePokeId: number) {
+  lastSeenPokemonId = savePokeId;
+}
 
 export function Home() {
   const queryInput = globalInput;
-  // console.log(queryInput, "estou aqui");
-
   const { data, loading, error } = useQuery(getPokemonsListQuery());
+  const [counter, setCounter] = useState(queryOffset);
+  const [pageCounter, setPageCounter] = useState(roundedId);
 
-  const [counter, setCounter] = useState(0);
-  const [pageCounter, setPageCounter] = useState(1);
+  if (loadedAPokemon) {
+    function saveState() {
+      let pageId = lastSeenPokemonId / 12;
 
-  // if (loading) {
-  //   return (
-  //     <>
-  //       {" "}
-  //       <Loading />
-  //     </>
-  //   );
-  // }
+      if (lastSeenPokemonId <= 12) {
+        return;
+      } else if (lastSeenPokemonId > 12) {
+        roundedId = Math.floor(pageId) + 1;
+        setCounter(roundedId * 12);
+        setPageCounter(1);
+        loadedAPokemon = false;
+      }
+    }
+
+    saveState();
+  }
   if (error) {
     return <> `Error! ${error}` </>;
   }
@@ -131,9 +131,9 @@ export function Home() {
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
         <button
           disabled={counter === 0 || loading}
-          className='w-[97px] disabled:opacity-40'
+          className="w-[97px] disabled:opacity-40"
           onClick={() => {
-            setCounter((queryLimit = counter - 12));
+            setCounter((queryOffset = counter - 12));
             setPageCounter(pageCounter - 1);
           }}
         >
@@ -152,9 +152,9 @@ export function Home() {
         </span>
         <button
           disabled={loading}
-          className='w-[97px] disabled:opacity-40'
+          className="w-[97px] disabled:opacity-40"
           onClick={() => {
-            setCounter((queryLimit = counter + 12));
+            setCounter((queryOffset = counter + 12));
             setPageCounter(pageCounter + 1);
           }}
         >

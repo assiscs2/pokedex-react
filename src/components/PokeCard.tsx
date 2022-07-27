@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { HandleIncrementId } from "../hooks/HandleIncrementId";
-import { PokemonCardProps } from "../pages/Home";
+import { PokemonCardProps, setLoadedAPokemon } from "../pages/Home";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
 import { PokemonTypeCard } from "./PokemonTypeCard";
 
@@ -24,6 +24,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
         className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex"
         onClick={() => {
           pokeId = PokeCardProps.id;
+          setLoadedAPokemon()
         }}
       >
         <div className="flex items-center justify-center h-auto w-52">

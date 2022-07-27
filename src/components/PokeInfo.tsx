@@ -6,6 +6,8 @@ import { HandleIncrementId } from "../hooks/HandleIncrementId";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
 import { PokemonTypeCard } from "./PokemonTypeCard";
 import { Loading } from "./Loading";
+import { getSaveState } from "../pages/Home";
+import { Link } from "react-router-dom";
 
 export function PokeInfo() {
   const idPokemon = pokeId;
@@ -108,23 +110,27 @@ export function PokeInfo() {
   }
 
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
-  // console.log(data.pokemon_v2_pokemonsprites[0].sprites.split(" "))
 
-  const removeFullPokeLinkEdges = data.pokemon_v2_pokemonsprites[0].sprites.split(" ")
-  // const pokeFullImageLink = pokeImage[33].slice(1).slice(0, pokeImage[33].length - 5)
+  const removeFullPokeLinkEdges =
+    data.pokemon_v2_pokemonsprites[0].sprites.split(" ");
 
-  const fullPokeImage = removeFullPokeLinkEdges[33].slice(1).slice(0, removeFullPokeLinkEdges[33].length - 5)
-
-  console.log(fullPokeImage, "Teste")
+  const fullPokeImage = removeFullPokeLinkEdges[33]
+    .slice(1)
+    .slice(0, removeFullPokeLinkEdges[33].length - 5);
 
   return (
     <>
-      <a href={`/`}>
-        <button className="absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors">
+      <Link to={`/`}>
+        <button
+          className="absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors"
+          onClick={() => {
+            getSaveState(pokeInfo.id);
+          }}
+        >
           <ArrowFatLeft size={28} weight="fill" color="#C6C4CC" />
           Voltar
         </button>
-      </a>
+      </Link>
       <div className="p-6 h-[80vh] sm:w-[86vw] sm:grid sm:grid-flow-col sm:pl-4">
         <div className="flex sm:items-start justify-center">
           <img
@@ -183,7 +189,10 @@ export function PokeInfo() {
               <li className="mt-1 flex flex-col gap-1" key={idLocation}>
                 {data.pokemon_v2_locationarea_aggregate.nodes.map(
                   (PokeFullInfoProps: PokemonFullInfoProps) => {
-                    let filteredLocation = PokeFullInfoProps.name.replace(/-/g," ");
+                    let filteredLocation = PokeFullInfoProps.name.replace(
+                      /-/g,
+                      " "
+                    );
                     idLocation = HandleIncrementId(idLocation);
                     return (
                       <>

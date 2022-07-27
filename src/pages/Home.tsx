@@ -22,7 +22,7 @@ export interface PokemonCardQuery {
 }
 
 let queryOffset = 0;
-let lastSeenPokemonId = 1;
+let lastSeenPokemonId = 0;
 let roundedId = 1;
 export let loadedAPokemon = false;
 
@@ -111,10 +111,18 @@ export function Home() {
 
       if (lastSeenPokemonId <= 12) {
         return;
-      } else if (lastSeenPokemonId > 12) {
+      } 
+      
+      else if (lastSeenPokemonId % 12 === 0) {
+        setCounter(lastSeenPokemonId * 12);
+        setPageCounter(lastSeenPokemonId);
+        loadedAPokemon = false;
+      } 
+      
+      else if (lastSeenPokemonId > 12) {
         roundedId = Math.floor(pageId) + 1;
         setCounter(roundedId * 12);
-        setPageCounter(1);
+        setPageCounter(roundedId); 
         loadedAPokemon = false;
       }
     }

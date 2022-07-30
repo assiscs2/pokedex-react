@@ -1,11 +1,11 @@
 # Pokedex React
 
-<strong>Application currently in development<strong/>
+<strong>Application still in development<strong/>
 
 - The visual aspect of the aplication is mostly complete.
-- Most of the functionalities still need to be developed.
-- As well as the integration with the Pokedex API, that problably will be made using GraphQL with Apollo.
+- Some of the functionalities still need to be improved.
+- It was made possible by utilizing the public Pokedex API, and the integration was made using GraphQL and Apollo.
 
-An initial "preview" build of the application is available through vercel: https://pokedex-react-ojxpqaljn-assiscs2.vercel.app/
+The application is available through vercel: https://pokedex-react-topaz-zeta.vercel.app/
 
-The project uses Typescript, React, Vite, Tailwind, and soon Apollo for the API integration.
+This project was made using Typescript, Vite, React, Tailwind and Apollo.

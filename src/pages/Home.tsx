@@ -129,14 +129,13 @@ export function Home() {
       <Header />
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
         <button
-          disabled={pageCounter === 1 || loading}
+          disabled={queryOffset === 0 || loading}
           className="w-[97px] disabled:opacity-40"
           onClick={() => {
             if(queryOffset >= 12) {
               setCounter((queryOffset = counter - 12));
               setPageCounter(pageCounter - 1);
               pokemonPageId-=1;
-              getPokemonsListQuery()
             }
             console.log(counter, pageCounter, pokemonPageId, 'button -')
           }}

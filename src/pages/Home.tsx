@@ -125,7 +125,7 @@ export function Home() {
       <Header />
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
         <button
-          disabled={pageCounter === 1 || loading}
+          disabled={pokemonPageId === 1 || loading}
           className="w-[97px] disabled:opacity-40"
           onClick={() => {
             setCounter((queryOffset = counter - 12));

@@ -22,12 +22,17 @@ export interface PokemonCardQuery {
 }
 
 let queryOffset = 0;
-let lastSeenPokemonId = 0;
+let lastSeenPokemonId = 1;
 let roundedId = 1;
+let pokemonPageId = 1;
 export let loadedAPokemon = false;
 
 export function setLoadedAPokemon() {
   return (loadedAPokemon = true);
+}
+
+export function setPokemonPageId(PokePageId: number) {
+  pokemonPageId = PokePageId;
 }
 
 function getPokemonsListQuery() {
@@ -93,6 +98,7 @@ export interface PokemonCardProps {
   pokeInfo?: any;
   pokeImage: string;
   pokemon_v2_pokemonsprites?: any;
+  pokePageId: number;
 }
 
 export function getSaveState(savePokeId: number) {
@@ -101,30 +107,17 @@ export function getSaveState(savePokeId: number) {
 
 export function Home() {
   const queryInput = globalInput;
-  const { data, loading, error } = useQuery(getPokemonsListQuery());
   const [counter, setCounter] = useState(queryOffset);
-  const [pageCounter, setPageCounter] = useState(roundedId);
+  const [pageCounter, setPageCounter] = useState(pokemonPageId);
+  const { data, loading, error } = useQuery(getPokemonsListQuery());
 
   if (loadedAPokemon) {
     function saveState() {
-      let pageId = lastSeenPokemonId / 12;
-
-      if (lastSeenPokemonId <= 12) {
-        return;
-      } 
-      
-      else if (lastSeenPokemonId % 12 === 0) {
-        setCounter(lastSeenPokemonId * 12);
-        setPageCounter(lastSeenPokemonId);
-        loadedAPokemon = false;
-      } 
-      
-      else if (lastSeenPokemonId > 12) {
-        roundedId = Math.floor(pageId) + 1;
-        setCounter(roundedId * 12);
-        setPageCounter(roundedId); 
-        loadedAPokemon = false;
-      }
+      console.log(pokemonPageId, 'pokemonPageId')
+      setCounter(pokemonPageId*12);
+      setPageCounter(pokemonPageId);
+      loadedAPokemon = false
+      console.log(counter, 'counter', pageCounter, 'pageCounter')
     }
 
     saveState();
@@ -143,6 +136,8 @@ export function Home() {
           onClick={() => {
             setCounter((queryOffset = counter - 12));
             setPageCounter(pageCounter - 1);
+            roundedId = counter;
+            console.log(counter, pageCounter, 'button -')
           }}
         >
           <CaretLeft
@@ -164,6 +159,8 @@ export function Home() {
           onClick={() => {
             setCounter((queryOffset = counter + 12));
             setPageCounter(pageCounter + 1);
+            roundedId = counter;
+            console.log(counter, pageCounter, 'button +')
           }}
         >
           Next Page{" "}
@@ -198,9 +195,8 @@ export function Home() {
                       name={PokeCardProps.name}
                       pokemon_species_id={PokeCardProps.pokemon_species_id}
                       pokeInfo={PokeCardProps.pokemon_v2_pokemontypes}
-                      pokeImage={
-                        PokeCardProps.pokemon_v2_pokemonsprites[0].sprites
-                      }
+                      pokeImage={PokeCardProps.pokemon_v2_pokemonsprites[0].sprites}
+                      pokePageId={pageCounter}
                     />
                   );
                 })}

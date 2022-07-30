@@ -135,6 +135,7 @@ export function Home() {
             if(queryOffset >= 12) {
               setCounter((queryOffset = counter - 12));
               setPageCounter(pageCounter - 1);
+              pokemonPageId-=1;
             }
             console.log(counter, pageCounter, pokemonPageId, 'button -')
           }}
@@ -158,6 +159,7 @@ export function Home() {
           onClick={() => {
             setCounter((queryOffset = counter + 12));
             setPageCounter(pageCounter + 1);
+            pokemonPageId+=1;
             console.log(counter, pageCounter, pokemonPageId, 'button -')
           }}
         >

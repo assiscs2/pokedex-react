@@ -25,6 +25,7 @@ let queryOffset = 0;
 let pokemonPageId = 1;
 export let loadedAPokemon = false;
 
+
 export function setLoadedAPokemon() {
   return (loadedAPokemon = true);
 }
@@ -105,6 +106,8 @@ export function Home() {
   const [pageCounter, setPageCounter] = useState(pokemonPageId);
   const { data, loading, error } = useQuery(getPokemonsListQuery());
 
+
+
   if (loadedAPokemon) {
     function saveState() {
       console.log(pokemonPageId, 'pokemonPageId')
@@ -116,6 +119,7 @@ export function Home() {
 
     saveState();
   }
+
   if (error) {
     return <> `Error! ${error}` </>;
   }
@@ -125,12 +129,14 @@ export function Home() {
       <Header />
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
         <button
-          disabled={pokemonPageId === 1 || loading}
+          disabled={pageCounter === 1 || loading}
           className="w-[97px] disabled:opacity-40"
           onClick={() => {
-            setCounter((queryOffset = counter - 12));
-            setPageCounter(pageCounter - 1);
-            console.log(counter, pageCounter, 'button -')
+            if(queryOffset >= 12) {
+              setCounter((queryOffset = counter - 12));
+              setPageCounter(pageCounter - 1);
+            }
+            console.log(counter, pageCounter, pokemonPageId, 'button -')
           }}
         >
           <CaretLeft
@@ -152,10 +158,10 @@ export function Home() {
           onClick={() => {
             setCounter((queryOffset = counter + 12));
             setPageCounter(pageCounter + 1);
-            console.log(counter, pageCounter, 'button +')
+            console.log(counter, pageCounter, pokemonPageId, 'button -')
           }}
         >
-          Next Page{" "}
+          Next Page
           <CaretRight
             size={20}
             color="#c6c4cc"

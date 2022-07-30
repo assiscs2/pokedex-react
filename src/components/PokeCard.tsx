@@ -6,9 +6,9 @@ import { PokemonTypeCard } from "./PokemonTypeCard";
 
 export let pokeId = 1;
 
-// export function setPokeId(pokeId?: number) {
-//   return pokeId;
-// }
+export function setPokeId(pokeId?: number) {
+  return pokeId;
+}
 
 export function PokeCard(PokeCardProps: PokemonCardProps) {
   let idTypeCard = 0;

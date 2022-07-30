@@ -6,7 +6,6 @@ import { HandleIncrementId } from "../hooks/HandleIncrementId";
 import { PokemonFullInfoProps } from "../pages/Pokemon";
 import { PokemonTypeCard } from "./PokemonTypeCard";
 import { Loading } from "./Loading";
-import { getSaveState } from "../pages/Home";
 import { Link } from "react-router-dom";
 
 export function PokeInfo() {
@@ -123,9 +122,6 @@ export function PokeInfo() {
       <Link to={`/`}>
         <button
           className="absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors"
-          onClick={() => {
-            getSaveState(pokeInfo.id);
-          }}
         >
           <ArrowFatLeft size={28} weight="fill" color="#C6C4CC" />
           Voltar

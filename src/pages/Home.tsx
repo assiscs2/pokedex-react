@@ -22,8 +22,6 @@ export interface PokemonCardQuery {
 }
 
 let queryOffset = 0;
-let lastSeenPokemonId = 1;
-let roundedId = 1;
 let pokemonPageId = 1;
 export let loadedAPokemon = false;
 
@@ -101,10 +99,6 @@ export interface PokemonCardProps {
   pokePageId: number;
 }
 
-export function getSaveState(savePokeId: number) {
-  lastSeenPokemonId = savePokeId;
-}
-
 export function Home() {
   const queryInput = globalInput;
   const [counter, setCounter] = useState(queryOffset);
@@ -131,12 +125,11 @@ export function Home() {
       <Header />
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
         <button
-          disabled={counter === 0 || loading}
+          disabled={pageCounter === 1 || loading}
           className="w-[97px] disabled:opacity-40"
           onClick={() => {
             setCounter((queryOffset = counter - 12));
             setPageCounter(pageCounter - 1);
-            roundedId = counter;
             console.log(counter, pageCounter, 'button -')
           }}
         >
@@ -159,7 +152,6 @@ export function Home() {
           onClick={() => {
             setCounter((queryOffset = counter + 12));
             setPageCounter(pageCounter + 1);
-            roundedId = counter;
             console.log(counter, pageCounter, 'button +')
           }}
         >

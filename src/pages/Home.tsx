@@ -136,6 +136,7 @@ export function Home() {
               setCounter((queryOffset = counter - 12));
               setPageCounter(pageCounter - 1);
               pokemonPageId-=1;
+              getPokemonsListQuery()
             }
             console.log(counter, pageCounter, pokemonPageId, 'button -')
           }}

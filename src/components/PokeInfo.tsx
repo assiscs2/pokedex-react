@@ -134,7 +134,7 @@ export function PokeInfo() {
           <img
             className="min-h-[185px] min-w-[185px] h-max w-max sm:mt-8"
             src={fullPokeImage}
-            alt="Imagem de um Bulbasaur"
+            alt={`Imagem de um ${pokeInfo.name}`}
           />
         </div>
         <div className="p-4 flex flex-col lg:max-h-24 sm:pl-8 sm:pr-8">

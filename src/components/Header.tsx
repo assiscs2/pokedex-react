@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { PokeInfo } from "./PokeInfo";
 import logo from "/src/assets/logo.png";
 
 

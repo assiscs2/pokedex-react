@@ -1,4 +1,4 @@
-import { Header } from "../components/Header";
+import { globalInput, Header } from "../components/Header";
 import { PokeInfo } from "../components/PokeInfo";
 
 export interface PokemonFullInfoProps {
@@ -12,6 +12,9 @@ export interface PokemonFullInfoProps {
 }
 
 export function Pokemon() {
+
+  console.log(globalInput)
+
   return (
     <>
       <Header />

@@ -9,10 +9,12 @@ import { Loading } from "./Loading";
 import { Link } from "react-router-dom";
 
 export function PokeInfo() {
+
   const idPokemon = pokeId;
   let idType = 0;
   let idAbility = 0;
   let idLocation = 0;
+
 
   client
     .query({

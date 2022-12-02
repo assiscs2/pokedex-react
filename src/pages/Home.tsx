@@ -21,8 +21,8 @@ export interface PokemonCardQuery {
   };
 }
 
-let queryOffset = 0;
-let pokemonPageId = 1;
+export let queryOffset = 0;
+export let pokemonPageId = 1;
 export let loadedAPokemon = false;
 
 

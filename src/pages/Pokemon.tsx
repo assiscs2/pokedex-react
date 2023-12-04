@@ -17,14 +17,16 @@ export function Pokemon() {
   // console.log(globalInput)
 
   return (
-    <>
+
+    <div className="p-0 m-0">
       <Header />
       <div className="mt-8 flex justify-center">
         <PokeInfo />
       </div>
-      <div className="mt-10">
+      <div className="absolute bottom-0">
         <Footer />
       </div>
-    </>
+    </div>
+
   );
 }

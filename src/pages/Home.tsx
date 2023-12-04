@@ -136,7 +136,7 @@ export function Home() {
 
 
   return (
-    <>
+    <div className="p-0 m-0 overflow-x-hidden">
       <Header />
       {/* Top Navigation Bar */}
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
@@ -278,6 +278,6 @@ export function Home() {
         </div>
       </div>
       <Footer />
-    </>
+    </div >
   );
 }

@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import { globalInput, Header } from "../components/Header";
 import { PokeInfo } from "../components/PokeInfo";
 
@@ -13,13 +14,16 @@ export interface PokemonFullInfoProps {
 
 export function Pokemon() {
 
-  console.log(globalInput)
+  // console.log(globalInput)
 
   return (
     <>
       <Header />
       <div className="mt-8 flex justify-center">
         <PokeInfo />
+      </div>
+      <div className="mt-10">
+        <Footer />
       </div>
     </>
   );

@@ -30,7 +30,6 @@ export let loadedAPokemon = false;
 
 
 export function setLoadedAPokemon() {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   return (loadedAPokemon = true);
 }
 
@@ -123,7 +122,6 @@ export function Home() {
       setCounter(pokemonPageId * 12);
       setPageCounter(pokemonPageId);
       loadedAPokemon = false
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
       // console.log(counter, 'counter', pageCounter, 'pageCounter')
     }
 
@@ -140,12 +138,11 @@ export function Home() {
       <Header />
       {/* Top Navigation Bar */}
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
-        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }}>
+        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
           <button
             className="w-[97px] disabled:opacity-40"
             onClick={() => {
               if (queryOffset >= 12) {
-                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
                 setCounter((queryOffset = counter - 12));
                 setPageCounter(pageCounter - 1);
                 pokemonPageId -= 1;
@@ -168,24 +165,25 @@ export function Home() {
             pageCounter +
             "                       |"}
         </span>
-        <button
-          className="w-[97px] disabled:opacity-40"
-          onClick={() => {
-            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-            setCounter((queryOffset = counter + 12));
-            setPageCounter(pageCounter + 1);
-            pokemonPageId += 1;
-            // console.log(counter, pageCounter, pokemonPageId, 'button -')
-          }}
-          disabled={loading}
-        >
-          Next Page
-          <CaretRight
-            size={20}
-            color="#c6c4cc"
-            weight="fill"
-            className="inline mb-0.5"
-          />
+        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
+          <button
+            className="w-[97px] disabled:opacity-40"
+            onClick={() => {
+              setCounter((queryOffset = counter + 12));
+              setPageCounter(pageCounter + 1);
+              pokemonPageId += 1;
+              // console.log(counter, pageCounter, pokemonPageId, 'button -')
+            }}
+            disabled={loading}
+          >
+            Next Page
+            <CaretRight
+              size={20}
+              color="#c6c4cc"
+              weight="fill"
+              className="inline mb-0.5"
+            />
+          </button>
         </button>
       </div>
 
@@ -225,13 +223,13 @@ export function Home() {
       {/* Bottom Navigation Bar */}
       <div className="flex items-center justify-center">
         <div className="flex items-center justify-center gap-8 text-xs">
-          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }}>
+          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
             <button
               disabled={queryOffset === 0 || loading}
               className="w-[97px] disabled:opacity-40"
               onClick={() => {
                 if (queryOffset >= 12) {
-                  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+
                   setCounter((queryOffset = counter - 12));
                   setPageCounter(pageCounter - 1);
                   pokemonPageId -= 1;
@@ -253,12 +251,11 @@ export function Home() {
               pageCounter +
               "                       |"}
           </span>
-          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }}>
+          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
             <button
               disabled={loading}
               className="w-[97px] disabled:opacity-40"
               onClick={() => {
-                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
                 setCounter((queryOffset = counter + 12));
                 setPageCounter(pageCounter + 1);
                 pokemonPageId += 1;

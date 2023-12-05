@@ -19,12 +19,12 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
     .slice(0, removeEdgesImage[1].length - 3)
     .replace('media', 'master'); /* Talvez tenha que remover depois, edição do caminho dos arquivos para resover erro do GraphQL */
 
-  console.log(pokeCardImage)
+  // console.log(pokeCardImage)
 
   return (
     <Link to={`pokemon/${PokeCardProps.id}`}>
       <div
-        className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex lg:hover:w-[26rem] hover:h-[17rem] md:hover:w-[22rem] sm:hover:w-[20rem]
+        className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex lg:hover:w-[26rem] hover:h-[17rem] md:hover:w-[22rem] sm:hover:w-[20rem] md:hover:-translate-x-4 md:hover:-translate-y-3
         transition-all duration-300"
         onClick={() => {
           pokeId = PokeCardProps.id;

@@ -2,7 +2,7 @@ import GithubLogo2 from "./../assets/github-logo.svg"
 
 export default function Footer() {
   return (
-    <div className="flex items-center justify-center h-[4.5rem] w-[100vw] bg-red-500 gap-2 text-sm mt-4">
+    <div className="flex items-center justify-center h-[4.5rem] w-[100vw] bg-red-500 gap-2 text-sm mt-4 text-gray-800 text-sm font-bold">
 
       <p>Projeto desenvolvido por Gustavo Assis</p>
       <span>-</span>

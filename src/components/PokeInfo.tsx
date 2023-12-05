@@ -122,14 +122,14 @@ export function PokeInfo() {
     .slice(0, removeFullPokeLinkEdges[33].length - 3);
 
 
-  console.log(fullPokeImage)
+  // console.log(fullPokeImage)
 
   return (
     <>
       <div className="transition-all duration-150">
         <Link to={`/`}>
           <button
-            className="absolute top-3 left-3 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-colors"
+            className="absolute top-3 left-4 flex gap-1 text-xs items-center text-gray-200 bg-gray-800 hover:bg-gray-700 p-1 rounded-xl pr-2 border-2 border-gray-600 transition-all hover:p-2 hover:pr-3 hover:-translate-x-1 hover:-translate-y-1 duration-200"
           >
             <ArrowFatLeft size={28} weight="fill" color="#C6C4CC" />
             Voltar

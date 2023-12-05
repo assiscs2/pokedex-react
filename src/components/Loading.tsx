@@ -1,8 +1,7 @@
 import { SpinnerGap } from "phosphor-react"
-import resetView from "../hooks/HandleResetView"
 
 export function Loading() {
-  resetView()
+
   return (
 
     <div

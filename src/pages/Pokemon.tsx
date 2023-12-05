@@ -13,7 +13,9 @@ export interface PokemonFullInfoProps {
 }
 
 export function Pokemon() {
-
+  window.scrollTo({
+    top: 0, left: 0, behavior: 'auto'
+  })
   // console.log(globalInput)
 
   return (

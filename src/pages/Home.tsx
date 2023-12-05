@@ -138,7 +138,7 @@ export function Home() {
       <Header />
       {/* Top Navigation Bar */}
       <div className="flex items-center justify-center pt-4 gap-8 text-xs">
-        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
+        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) }}>
           <button
             className="w-[97px] disabled:opacity-40"
             onClick={() => {
@@ -165,7 +165,7 @@ export function Home() {
             pageCounter +
             "                       |"}
         </span>
-        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
+        <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) }}>
           <button
             className="w-[97px] disabled:opacity-40"
             onClick={() => {
@@ -223,7 +223,7 @@ export function Home() {
       {/* Bottom Navigation Bar */}
       <div className="flex items-center justify-center">
         <div className="flex items-center justify-center gap-8 text-xs">
-          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
+          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) }}>
             <button
               disabled={queryOffset === 0 || loading}
               className="w-[97px] disabled:opacity-40"
@@ -251,7 +251,7 @@ export function Home() {
               pageCounter +
               "                       |"}
           </span>
-          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }) }}>
+          <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }) }}>
             <button
               disabled={loading}
               className="w-[97px] disabled:opacity-40"

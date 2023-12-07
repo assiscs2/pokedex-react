@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import { globalInput, Header } from "../components/Header";
+import { Header } from "../components/Header";
 import { PokeInfo } from "../components/PokeInfo";
 
 export interface PokemonFullInfoProps {

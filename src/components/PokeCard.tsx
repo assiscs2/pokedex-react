@@ -6,9 +6,10 @@ import { PokemonTypeCard } from "./PokemonTypeCard";
 
 export let pokeId = 1;
 
-export function setPokeId(pokeId?: number) {
-  return pokeId;
-}
+// export function setPokeId(props?: number) {
+//   console.log(props, 'cheguei')
+//   return pokeId;
+// }
 
 export function PokeCard(PokeCardProps: PokemonCardProps) {
   let idTypeCard = 0;
@@ -22,12 +23,15 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
   // console.log(pokeCardImage)
 
   return (
-    <Link to={`pokemon/${PokeCardProps.id}`}>
+    <Link to={`../pokemon/${PokeCardProps.id}`}>
       <div
+        key={PokeCardProps.id}
         className="bg-gray-100 lg:w-96 md:w-80 sm:w-72 h-60 rounded-lg border-4 border-gray-900 flex lg:hover:w-[26rem] hover:h-[17rem] md:hover:w-[22rem] sm:hover:w-[20rem] md:hover:-translate-x-4 md:hover:-translate-y-3
         transition-all duration-300"
         onClick={() => {
           pokeId = PokeCardProps.id;
+          // setPokeId(PokeCardProps.id)
+          console.log(pokeId, 'pokecard')
           setLoadedAPokemon()
           setPokemonPageId(PokeCardProps.pokePageId)
         }}
@@ -40,7 +44,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
             alt={`imagem de um ${PokeCardProps.name}`}
           />
         </div>
-        <div className="bg-red-500 flex-1 rounded-r-md text-gray-800 flex items-center flex-col h-full justify-evenly min-w-[114px] border-l-4 border-gray-900 -ml-2">
+        <div className="bg-red-500 flex-1 rounded-r-[0.234rem] text-gray-800 flex items-center flex-col h-full justify-evenly min-w-[114px] border-l-4 border-gray-900 -ml-2">
           <strong className="text-gray-700 bg-gray-100 border-2 border-gray-900 rounded-lg p-1 mx-2 capitalize">
             {PokeCardProps.name}
           </strong>

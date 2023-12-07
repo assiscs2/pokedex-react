@@ -15,6 +15,7 @@ export function PokeInfo() {
   let idAbility = 0;
   let idLocation = 0;
 
+  console.log(idPokemon)
 
   client
     .query({
@@ -59,7 +60,7 @@ export function PokeInfo() {
     .then((result) => result);
 
   const GET_POKEMON_FULL_INFORMATION_BY_ID = gql`
-    query getPokemonInformationById($idPokemon: Int) {
+    query getPokemonInformationById($idPokemon: Int){
   pokemon_v2_pokemon_aggregate(where: {id: {_eq: ${idPokemon}}}) {
     nodes {
       id

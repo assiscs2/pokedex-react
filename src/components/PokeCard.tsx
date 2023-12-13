@@ -30,8 +30,7 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
         transition-all duration-300"
         onClick={() => {
           pokeId = PokeCardProps.id;
-          // setPokeId(PokeCardProps.id)
-          console.log(pokeId, 'pokecard')
+          // console.log(pokeId, 'pokecard')
           setLoadedAPokemon()
           setPokemonPageId(PokeCardProps.pokePageId)
         }}

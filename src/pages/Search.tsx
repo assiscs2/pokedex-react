@@ -7,6 +7,7 @@ import { searchParams } from "./Home";
 import { Loading } from "../components/Loading";
 import { CaretLeft, CaretRight } from "phosphor-react";
 import Footer from "../components/Footer";
+import PokemonNotFound from "../components/PokemonNotFound";
 
 
 export interface PokemonCardQuery {
@@ -116,10 +117,16 @@ export function Search() {
 
   // console.log(data, 'functionStart')
 
-  const validateSearch = data.pokemon_v2_pokemon_aggregate.nodes
-  // console.log(data.pokemon_v2_pokemon_aggregate.nodes)
+  // const validateSearch = data.pokemon_v2_pokemon_aggregate.nodes
 
-  console.log(validateSearch, 'functionStart')
+  // console.log(validateSearch, 'functionStart')
+  // const testImg = data?.pokemon_v2_pokemon_aggregate.nodes[0].pokemon_v2_pokemonsprites[0].sprites
+
+  // console.log(testImg)
+
+
+
+
 
   if (loadedAPokemon) {
     function saveState() {
@@ -191,7 +198,6 @@ export function Search() {
           </button>
         </button>
       </div>
-      <div>
       {loading ? (
         <Loading />
       ) : (
@@ -199,8 +205,8 @@ export function Search() {
           <ul>
             <li className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 mx-4">
               {data.pokemon_v2_pokemon_aggregate.nodes.map((PokeCardProps: PokemonCardProps) => {
-                // console.log(data.pokemon_v2_pokemon_aggregate.nodes)
-                // console.log('Cheguei no pokecard')
+                console.log(PokeCardProps, 'pokecardprops')
+                console.log('Cheguei no pokecard')
                 return (
                   <PokeCard
                     key={PokeCardProps.id}
@@ -219,7 +225,6 @@ export function Search() {
           </ul>
         </div>
       )}
-      </div>
       <div className="absolute bottom-0">
         {/* Bottom Navigation Bar */}
         <div className="flex justify-center ">

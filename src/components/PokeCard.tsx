@@ -14,11 +14,13 @@ export let pokeId = 1;
 export function PokeCard(PokeCardProps: PokemonCardProps) {
   let idTypeCard = 0;
 
-  const removeEdgesImage = PokeCardProps.pokeImage.split(" ");
-  const pokeCardImage = removeEdgesImage[1]
-    .slice(1)
-    .slice(0, removeEdgesImage[1].length - 3)
-    .replace('media', 'master'); /* Talvez tenha que remover depois, edição do caminho dos arquivos para resover erro do GraphQL */
+  // const removeEdgesImage = PokeCardProps.pokeImage.split("");
+  // console.log(PokeCardProps.pokeImage.front_default, 'chegay')
+  const pokeCardImage = PokeCardProps.pokeImage.front_default  // const pokeCardImage = removeEdgesImage[1]
+  //   .slice(1)
+  //   .slice(0, removeEdgesImage[1].length - 3)
+  //   .replace('media', 'master'); 
+  /* Talvez tenha que remover depois, edição do caminho dos arquivos para resover erro do GraphQL */
 
   // console.log(pokeCardImage)
 

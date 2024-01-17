@@ -114,13 +114,18 @@ export function PokeInfo() {
   const pokeInfo = data.pokemon_v2_pokemon_aggregate.nodes[0];
 
   const removeFullPokeLinkEdges =
-    data.pokemon_v2_pokemonsprites[0].sprites.split(" ");
+    data.pokemon_v2_pokemonsprites[0].sprites;
+  ;
+
+  console.log(removeFullPokeLinkEdges)
 
 
+  // const fullPokeImage = removeFullPokeLinkEdges[33]
+  //   .slice(1)
+  //   .slice(0, removeFullPokeLinkEdges[33].length - 3);
 
-  const fullPokeImage = removeFullPokeLinkEdges[33]
-    .slice(1)
-    .slice(0, removeFullPokeLinkEdges[33].length - 3);
+
+  const fullPokeImage = removeFullPokeLinkEdges.front_default
 
 
   // console.log(fullPokeImage)
@@ -137,9 +142,9 @@ export function PokeInfo() {
           </button>
         </Link>
         <div className="p-6 sm:w-[86vw] sm:grid sm:grid-flow-col sm:pl-4">
-          <div className="flex sm:items-start justify-center">
+          <div className="flex items-center justify-center">
             <img
-              className="min-h-[185px] min-w-[185px] h-max w-max sm:mt-8"
+              className=" flex items-center justify-center h-64 w-64 sm:h-80 sm:w-80 md:h-72 md:w-72 lg:h-[500px] lg:w-[500px]"
               src={fullPokeImage}
               alt={`Imagem de um ${pokeInfo.name}`}
             />

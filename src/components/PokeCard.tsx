@@ -16,7 +16,8 @@ export function PokeCard(PokeCardProps: PokemonCardProps) {
 
   // const removeEdgesImage = PokeCardProps.pokeImage.split("");
   // console.log(PokeCardProps.pokeImage.front_default, 'chegay')
-  const pokeCardImage = PokeCardProps.pokeImage.front_default  // const pokeCardImage = removeEdgesImage[1]
+  const pokeCardImage = PokeCardProps.pokeImage.front_default  
+  // const pokeCardImage = removeEdgesImage[1]
   //   .slice(1)
   //   .slice(0, removeEdgesImage[1].length - 3)
   //   .replace('media', 'master'); 

@@ -103,7 +103,7 @@ export interface PokemonCardProps {
   typeName?: any;
   pokemon_v2_pokemon_aggregate?: any;
   pokeInfo?: any;
-  pokeImage: string;
+  pokeImage: any;
   pokemon_v2_pokemonsprites?: any;
   pokePageId: number;
 }
